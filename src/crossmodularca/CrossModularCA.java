@@ -18,7 +18,8 @@ public class CrossModularCA {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-
+        
+        connectDatabase();
         displayMenu();
     }
 
@@ -41,7 +42,7 @@ public class CrossModularCA {
             case 2:
                 System.out.println("Welcome to the self registration process.");
                 String newUsername = InputUtilities.getUserText("Enter a username.");
-                String newPassword = InputUtilities.getUserText("Enter a password.");
+                String newPassword = InputUtilities.getUserText("Enter  password.");
                 //TO DO - GENERATE NEW USER OBJECT & INSERT TO DATABASE
                 break;
 
@@ -49,7 +50,7 @@ public class CrossModularCA {
         }
 
     }
-
+    
     private static void connectDatabase() {
         
             try {
@@ -57,9 +58,9 @@ public class CrossModularCA {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             String dbServer = "jdbc:mysql://localhost:3306/equations";
-            String user = "CCT";
-            String password = "Dublin";
-            String query = "SELECT * FROM user";
+            String user = "root";
+            String password = "root";
+            String query = "SELECT * FROM user_data";
 
             // Get a connection to the database
             Connection conn = DriverManager.getConnection(dbServer, user, password);
@@ -72,11 +73,11 @@ public class CrossModularCA {
             System.out.println("Outcome is: Successfull");
 
             // Loop through the result set
-            System.out.println("ID" + "\t" + "First Name" + "\t\t" + "Last Name");
+            System.out.println("ID" + "\t" + "Username" + "\t\t" + "Password");
             System.out.println("===============================================");
             while (rs.next()) {
-                System.out.println(rs.getString("id") + "\t" + rs.getString("first_name")
-                        + "\t\t\t" + rs.getString("last_name"));
+                System.out.println(rs.getString("id") + "\t" + rs.getString("username")
+                        + "\t\t\t" + rs.getString("password"));
             }
 
             // Close the result set, statement and the connection
